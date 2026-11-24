@@ -1,0 +1,296 @@
+================================================================================
+PANDUAN MEMAHAMI WEBSITE PORTOFOLIO - ANGGRAITO HUSODO
+Mata Kuliah : Pemrograman Website
+File Utama  : Tugas Website.html
+================================================================================
+
+Dokumen ini dibuat sebagai catatan belajar dan pegangan presentasi supaya kamu
+paham 100% cara kerja website portofolio kamu sendiri: mulai dari struktur teks,
+tampilan visual, material pendukung (aset), hingga sistem JavaScript di baliknya.
+
+--------------------------------------------------------------------------------
+1. ARSITEKTUR DASAR WEBSITE (3 LAPISAN UTAMA)
+--------------------------------------------------------------------------------
+Website ini dibuat dengan teknologi web standar (Vanilla Web, tanpa framework
+berat seperti React/Bootstrap) sehingga ringan dan cocok untuk tugas kuliah:
+
+1) HTML  -> Tugas Website.html
+   Berperan sebagai "kerangka & konten" (teks, gambar, tabel, form, tombol).
+   Menggunakan tag semantik HTML5 (<header>, <nav>, <main>, <section>,
+   <article>, <footer>) agar struktur dokumen rapi dan mudah dibaca browser.
+
+2) CSS   -> css/style.css
+   Berperan sebagai "tampilan & tata letak" (warna, font, grid, dark/light mode,
+   responsif di HP, animasi hover, serta bentuk 7-segment display).
+
+3) JS    -> js/script.js
+   Berperan sebagai "otak & interaksi" (tema dark/light melingkar, filter/cari
+   proyek, lightbox foto, simulator rangkaian elektronika, salin NPM/email,
+   hingga validasi form kontak).
+
+Alur pemuatan halaman saat dibuka di browser:
+- Browser membaca Tugas Website.html dari atas ke bawah.
+- Di <head>, browser memuat font Google Fonts (jika online) dan css/style.css.
+- Di bagian paling bawah <body>, browser memuat js/script.js.
+- Di js/script.js, seluruh kode dibungkus di dalam event:
+  document.addEventListener('DOMContentLoaded', () => { ... })
+  Artinya JavaScript menunggu semua elemen HTML selesai dimuat dulu sebelum
+  mencari ID/class elemen dan memasang event listener.
+
+--------------------------------------------------------------------------------
+2. MATERIAL PENDUKUNG (ASET & RESOURCE)
+--------------------------------------------------------------------------------
+Semua file pendukung berada di folder proyek E:\COLLEGE\Tugas Web\:
+
+A. Gambar & Dokumen Lokal:
+- foto.jpg             : Foto profil bulat di kartu "Biodata Mahasiswa" (Hero).
+- Alarm depan.jpg      : Foto proyek Prototipe Alarm Pintu (tampak depan).
+- Alarm belakang.jpg   : Foto proyek Prototipe Alarm Pintu (tampak belakang/solder).
+- Dadu Depan.jpeg      : Foto proyek Prototipe Dadu Digital (tampak depan).
+- dadu belakang.jpg    : Foto proyek Prototipe Dadu Digital (tampak belakang).
+- auto lighting.jpeg   : Foto proyek Auto Lighting Control (rangkaian LDR).
+- cv-anggraito.pdf     : File CV yang langsung terunduh saat tombol
+                         "Download CV" / "Download PDF CV" diklik
+                         (memakai atribut HTML `download`).
+
+B. Font Eksternal (Google Fonts + Fallback Lokal):
+- Plus Jakarta Sans : Dipakai untuk teks utama & judul (`--font-sans`).
+- JetBrains Mono    : Dipakai untuk teks teknis seperti NPM, tahun, badge
+                      komponen, status relay, dan label PCB (`--font-mono`).
+- Jika sedang offline (tidak ada internet), CSS otomatis turun (fallback) ke
+  font bawaan sistem seperti 'Segoe UI', system-ui, Consolas, monospace.
+
+C. Web API Bawaan Browser (Tanpa Library Tambahan):
+- localStorage         : Menyimpan pilihan Dark Mode / Light Mode pengguna.
+- View Transitions API : `document.startViewTransition()` untuk efek transisi
+                         lingkaran saat ganti tema.
+- IntersectionObserver : Mendeteksi kapan section masuk layar untuk animasi
+                         muncul (`reveal`) & hitung angka statistik.
+- Clipboard API        : `navigator.clipboard.writeText()` untuk tombol Salin
+                         NPM & Email.
+- Web Audio API        : `AudioContext` untuk menghasilkan bunyi beep kotak
+                         (square wave) pada simulator Alarm Pintu.
+
+--------------------------------------------------------------------------------
+3. BEDAH BAGIAN TAMPILAN & TEKS (Tugas Website.html)
+--------------------------------------------------------------------------------
+Urutan tampilan dari atas ke bawah:
+
+1) Latar Belakang & Indikator Scroll:
+   - `.bg-grid`         : Pola kotak tipis ala papan sirkuit/PCB yang diam di
+                          belakang (`position: fixed`, `pointer-events: none`).
+   - `#scroll-progress` : Garis progres warna biru-hijau di paling atas layar
+                          yang melebar 0%-100% mengikuti posisi scroll.
+
+2) Navbar (`<header class="navbar" id="navbar">`):
+   - Sticky di atas layar dengan efek kaca buram (`backdrop-filter: blur(12px)`).
+   - Berisi logo (`Anggraito.dev`), 6 link navigasi (`#tentang`, `#pendidikan`,
+     `#proyek`, `#simulator`, `#fokus`, `#kontak`), tombol tema (`#theme-toggle`),
+     dan tombol hamburger (`#menu-toggle`) yang muncul di layar kecil (HP).
+
+3) Hero & Biodata (`<section id="tentang" class="hero-card">`):
+   - Kolom kiri : Badge status mahasiswa, judul `<h1>`, teks peran bergerak
+                  (`#typing-role`), deskripsi singkat, dan 3 tombol aksi
+                  (Lihat Proyek, Coba Lab Simulator, Download CV).
+   - Kolom kanan: Kartu biodata mahasiswa berisi `foto.jpg` dan tabel 3 baris:
+                  `Nama` (Anggraito Husodo), `NPM / Kelas` (`20124162` tombol
+                  salin + `· 3KB05`), dan `Alamat` (Tangerang, Banten).
+
+4) Ringkasan Statistik (`<section class="stats-bar">`):
+   - 4 kotak angka (`3` Proyek Praktikum, `12` Materi & Tools, `5` Bulan Magang
+     IT, `3` Simulator Virtual). Angka awal di HTML adalah `0` dan nilai
+     aslinya disimpan di atribut `data-target="..."` untuk dianimasikan JS.
+
+5) Riwayat Pendidikan & Pengalaman (`<section id="pendidikan">`):
+   - Menggunakan tampilan timeline vertikal:
+     - Universitas Gunadarma (2024 - Sekarang) — S1 Sistem Komputer
+     - Diskominfo · Magang (Mei 2024 - September 2024) — IT Help Desk &
+       Jaringan Komputer
+     - SMKN 1 Gunung Sindur — Teknik Komputer dan Jaringan
+
+6) Proyek Praktikum (`<section id="proyek">`):
+   - Kontrol di kanan atas: tombol filter status (`Semua`, `Selesai`,
+     `In Progress`) dengan `data-filter` dan kolom pencarian `#project-search`.
+   - Setiap kartu proyek (`.proyek-card`) punya:
+     - `data-status` ("selesai" atau "progress") untuk filter status.
+     - `data-tags` (kata kunci komponen/judul) untuk fitur pencarian.
+     - Tombol foto `.img-trigger` (`data-project`, `data-index`) untuk buka
+       Lightbox Modal.
+     - Tombol `.sim-jump` (`data-sim`) untuk langsung melompat ke tab
+       simulator proyek tersebut.
+
+7) Lab Simulator Prototipe Virtual (`<section id="simulator">`):
+   - Memakai sistem Tab (`.sim-tab` & `.sim-panel`):
+     - Tab 1 (`#sim-dadu`)     : Dadu Digital pakai **7-Segment LED Display**
+       (`#seven-seg` dengan segmen `a` sampai `g`), tombol Acak, Reset, dan
+       riwayat lemparan.
+     - Tab 2 (`#sim-lighting`) : Auto Lighting Control dengan slider intensitas
+       cahaya (`#ldr-slider`, 0-100%) dan ambang batas potensiometer
+       (`#pot-slider`, 10-90%).
+     - Tab 3 (`#sim-alarm`)    : Alarm Pintu dengan tombol Armed/Disarmed,
+       Buka/Tutup Pintu, dan Mute/Unmute suara buzzer.
+
+8) Fokus Belajar & Tools + Minat & Hobi (`<div class="two-col-grid">`):
+   - `#fokus`: Dibagi 2 kotak (`Materi Kuliah` dan `Tools & Peralatan`). Setiap
+     badge adalah `<button class="fokus-badge" data-info="...">`. Keterangan
+     detailnya disimpan langsung di atribut `data-info`.
+   - `#hobi` : Daftar minat & hobi personal.
+
+9) Kontak & Pesan Cepat (`<section id="kontak">`):
+   - Kolom kiri : Link `mailto:` + tombol salin email, link Instagram
+                  (`@agr.to_clone`), dan link GitHub (`github.com/sohu3`).
+   - Kolom kanan: Form pesan cepat (`#contact-form`) dengan input Nama, pilihan
+                  Topik, dan Pesan.
+
+10) Komponen Tambahan di Luar `<main>`:
+    - `<footer>`          : Copyright tahun, nama, kelas, jurusan, universitas.
+    - `#back-to-top`      : Tombol panah ke atas (muncul setelah scroll > 360px).
+    - `#image-modal`      : Pop-up Lightbox untuk memperbesar gambar proyek
+                            lengkap dengan tombol Prev, Next, Close, dan counter.
+    - `#toast-container`  : Wadah notifikasi kecil di pojok kiri bawah.
+
+--------------------------------------------------------------------------------
+4. BEDAH CSS & DESAIN (`css/style.css`)
+--------------------------------------------------------------------------------
+Hal penting yang perlu kamu pahami di CSS:
+
+1) CSS Variables (`:root` dan `body.dark-mode`):
+   - Warna tidak ditulis berulang-ulang di setiap elemen, tapi disimpan di
+     variabel seperti `--bg`, `--surface`, `--text`, `--accent`, `--border`.
+   - Saat `body` mendapat class `dark-mode`, nilai variabel otomatis berubah
+     sehingga seluruh halaman ikut berubah ke tema gelap secara seragam.
+
+2) Transisi Lingkaran Tema (View Transitions):
+   - Selector `::view-transition-old(root)` dan `::view-transition-new(root)`
+     mengatur lapisan tema lama (z-index: 1) dan tema baru (z-index: 9999).
+   - `animation: none` mematikan efek fade bawaan agar bisa diganti animasi
+     lingkaran dari JavaScript.
+   - `html.theme-transitioning` mematikan sementara `transition` CSS biasa
+     selama snapshot diambil supaya warna tema baru tertangkap utuh.
+
+3) Layout Modern (Grid & Flexbox):
+   - `display: grid` dipakai untuk Hero (`1.35fr 1fr`), Stats Bar (`repeat(4, 1fr)`),
+     Proyek Grid (`repeat(3, 1fr)`), Simulator (`300px 1fr`), Skills & Hobi,
+     serta Kontak.
+   - `display: flex` dipakai untuk navbar, deretan tombol, badge komponen, dan
+     tata letak isi kartu.
+
+4) Desain 7-Segment LED Display (`.seven-seg`, `.seg`):
+   - Setiap segmen (`a` sampai `g`) diposisikan dengan `position: absolute` di
+     dalam kotak `78px x 132px`.
+   - Bentuk ujung runcing segmen LED dibuat menggunakan CSS `clip-path: polygon(...)`.
+   - Saat segmen mendapat class `.on`, warnanya berubah merah terang (`#ef4444`)
+     dengan efek pendar `filter: drop-shadow(...)`.
+
+5) Responsif (Media Queries):
+   - `@media (max-width: 980px)`: Hero, 2 kolom skill/hobi, dan kontak berubah
+     menjadi 1 kolom; grid proyek menjadi 2 kolom.
+   - `@media (max-width: 768px)`: Menu navbar berubah menjadi tombol hamburger
+     `.btn-menu`, Stats Bar menjadi 2 kolom, dan proyek/simulator/form menjadi
+     1 kolom agar nyaman di layar HP.
+
+--------------------------------------------------------------------------------
+5. BEDAH SISTEM JAVASCRIPT (`js/script.js`)
+--------------------------------------------------------------------------------
+Di dalam `js/script.js`, ada 11 bagian utama:
+
+1) Toast Notification (`showToast(message)`):
+   - Membuat elemen `<div class="toast">` secara dinamis, menampilkannya di
+     `#toast-container`, lalu menghapusnya otomatis setelah ~2,8 detik.
+   - Menggantikan `alert()` agar interaksi tidak mengganggu pengguna.
+
+2) Dark/Light Mode + Transisi Lingkaran:
+   - Membaca tema tersimpan dari `localStorage.getItem('portfolio_theme')`
+     (atau mendeteksi preferensi sistem lewat `prefers-color-scheme: dark`).
+   - Saat `#theme-toggle` diklik:
+     - Menghitung titik koordinat tombol `(x, y)` dan radius ke sudut terjauh
+       layar pakai rumus Pythagoras (`Math.hypot`).
+     - Menjalankan `document.startViewTransition(...)`, lalu menganimasikan
+       `clipPath` dari `circle(0px at x y)` ke `circle(endRadius at x y)`.
+     - Menyimpan pilihan tema ke `localStorage`.
+
+3) Navigasi Mobile, Progress Bar, Active Nav & Back-to-Top:
+   - Event `scroll` pada `window` menghitung persentase tinggi halaman yang
+     sudah digulir untuk lebar `#scroll-progress`, memunculkan `#back-to-top`
+     jika `scrollY > 360`, dan menandai `.nav-link` yang sedang aktif.
+
+4) Typing Effect (`#typing-role`):
+   - Menggunakan fungsi rekursif dengan `setTimeout` untuk mengetik dan
+     menghapus bergantian 4 teks peran di Hero section.
+
+5) Scroll Reveal & Stats Counter:
+   - Menggunakan `IntersectionObserver`. Begitu elemen `.reveal` masuk layar,
+     class `.is-visible` ditambahkan agar muncul halus.
+   - Khusus `.stats-bar`, fungsi `animateStats()` menghitung naik angka dari `0`
+     ke `data-target` memakai `requestAnimationFrame`.
+
+6) Copy to Clipboard (`[data-copy]`):
+   - Mengambil nilai atribut `data-copy` (NPM `20124162` dan email
+     `angraitohusodo@gmail.com`) lalu menyalinnya ke clipboard & memunculkan toast.
+
+7) Filter & Pencarian Proyek:
+   - Memeriksa setiap `.proyek-card`: harus cocok dengan status tab aktif
+     (`all`, `selesai`, `progress`) DAN kata kunci di `#project-search`
+     (mencocokkan `data-tags` dan teks kartu). Jika 0 hasil, `#proyek-empty`
+     ditampilkan.
+
+8) Lightbox Modal Gallery:
+   - Data gambar disimpan di objek `projectGalleries` (key: `alarm`, `dadu`,
+     `lighting`).
+   - Mendukung klik Next/Prev, klik area luar modal untuk tutup, serta shortcut
+     keyboard `Escape`, `ArrowLeft`, dan `ArrowRight`.
+
+9) Lab Simulator Prototipe Virtual:
+   - **Dadu Digital (7-Segment)**:
+     Objek `sevenSegMap` memetakan angka `1-6` ke array segmen yang menyala,
+     contoh: `1 -> ['b', 'c']`, `3 -> ['a', 'b', 'g', 'c', 'd']`.
+     Saat tombol Acak diklik, `setInterval` berputar 12 kali (65ms per tick)
+     sebelum berhenti di angka acak `Math.floor(Math.random() * 6) + 1` dan
+     menyimpan maksimal 6 riwayat lemparan.
+   - **Auto Lighting (LDR)**:
+     Membandingkan `lightLevel` (`#ldr-slider`) dengan `threshold` (`#pot-slider`).
+     Jika `lightLevel < threshold`, relay aktif (`RELAY: ON`) dan class `.lamp-on`
+     ditambahkan ke `#room-box`.
+   - **Alarm Pintu**:
+     Menyalakan alarm jika `isArmed && isDoorOpen`. Saat aktif, class
+     `.triggered` membuat lampu sirene berkedip dan `playBeep()` membunyikan
+     nada `880Hz` tipe `square` lewat Web Audio API setiap `550ms`.
+
+10) Skill Inspector:
+    - Saat tombol `.fokus-badge` diklik, teks dari `badge.dataset.info`
+      ditampilkan ke `#skill-detail-text`.
+
+11) Form Kontak & Download CV:
+    - Form `#contact-form` mencegah reload halaman (`e.preventDefault()`),
+      mengecek apakah Nama dan Pesan terisi, lalu menyusun link `mailto:`
+      dengan `encodeURIComponent` untuk membuka aplikasi email.
+
+--------------------------------------------------------------------------------
+6. CONTOH POIN PRESENTASI / JIKA DITANYA DOSEN
+--------------------------------------------------------------------------------
+- "Kenapa tidak pakai framework seperti Bootstrap atau React?"
+  -> Karena proyek ini dirancang ringan dengan HTML5 semantik, CSS Grid/Flexbox
+     murni, dan Vanilla JavaScript agar struktur dasar web & manipulasi DOM
+     terlihat jelas dan mudah dipelihara.
+
+- "Bagaimana cara kerja Dark Mode-nya bisa tersimpan dan animasinya melingkar?"
+  -> Tema disimpan di `localStorage` dan dikontrol lewat class `.dark-mode`
+     pada `<body>` yang mengganti nilai CSS Custom Properties (`:root`).
+     Animasi lingkarannya memakai View Transitions API (`startViewTransition`)
+     dengan animasi `clip-path: circle(...)` yang berpusat dari koordinat
+     tombol tema.
+
+- "Bagaimana cara membuat simulator elektronikanya di browser?"
+  -> Semuanya dimodelkan dengan logika JavaScript murni: 7-Segment memakai
+     mapping segmen `a-g` + `setInterval`, LDR memakai perbandingan nilai dua
+     input range slider, dan Alarm Pintu memakai kondisi logika boolean
+     (`isArmed && isDoorOpen`) + Web Audio API untuk suara buzzer.
+
+- "Bagaimana cara kerja filter dan pencarian proyek?"
+  -> Setiap kartu proyek menyimpan atribut `data-status` dan `data-tags`.
+     JavaScript menyaring kartu yang cocok dengan filter status dan keyword
+     pencarian lalu mengatur properti `.hidden`.
+
+================================================================================
+Dibuat khusus untuk membantu memahami project: E:\COLLEGE\Tugas Web
+================================================================================
