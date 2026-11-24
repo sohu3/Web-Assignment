@@ -565,7 +565,7 @@ document.addEventListener('DOMContentLoaded', () => {
             doorStateText.textContent = `${doorStr} · ${armStr}`;
         }
         if (buzzerWave) {
-            buzzerWave.textContent = triggered ? 'BUZZER: BEEP! BEEP! (PERINGATAN)' : 'BUZZER: DIAM';
+            buzzerWave.textContent = triggered ? 'BUZZER: (PERINGATAN)' : 'BUZZER: DIAM';
         }
 
         if (triggered) {
