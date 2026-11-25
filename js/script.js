@@ -597,6 +597,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateAlarmSim();
 
+    // --- 9D. Aquaculture Water Control Simulator (ON/OFF - Arduino Uno) ---
+    const floodBox = document.getElementById('flood-box');
+    const tankReadout = document.getElementById('tank-readout');
+    const pumpBadgeEl = document.getElementById('pump-badge');
+    const sensorStateText = document.getElementById('sensor-state-text');
+    const relayStateText = document.getElementById('relay-state-text');
+    const pondRuleText = document.getElementById('pond-rule-text');
+    const btnWaterPresent = document.getElementById('btn-water-present');
+    const btnWaterAbsent = document.getElementById('btn-water-absent');
+    let hasWater = true;
+
+    function updatePondSim() {
+        const pumpOn = !hasWater;
+        floodBox?.classList.toggle('pump-active', pumpOn);
+
+        if (tankReadout) {
+            tankReadout.textContent = hasWater ? 'ADA AIR' : 'TIDAK ADA AIR';
+        }
+        if (pumpBadgeEl) {
+            pumpBadgeEl.textContent = pumpOn ? 'POMPA: HIDUP (MENGISI)' : 'POMPA: MATI';
+        }
+        if (sensorStateText) {
+            sensorStateText.textContent = hasWater ? 'ADA AIR' : 'TIDAK ADA AIR';
+        }
+        if (relayStateText) {
+            relayStateText.textContent = pumpOn ? 'ON' : 'OFF';
+        }
+        if (pondRuleText) {
+            pondRuleText.textContent = hasWater
+                ? 'Ada Air → Relay OFF → Pompa Mati'
+                : 'Tidak Ada Air → Relay ON → Pompa Hidup';
+        }
+
+        btnWaterPresent?.classList.toggle('btn-primary', hasWater);
+        btnWaterPresent?.classList.toggle('btn-secondary', !hasWater);
+        btnWaterAbsent?.classList.toggle('btn-primary', !hasWater);
+        btnWaterAbsent?.classList.toggle('btn-secondary', hasWater);
+    }
+
+    btnWaterPresent?.addEventListener('click', () => {
+        hasWater = true;
+        updatePondSim();
+    });
+
+    btnWaterAbsent?.addEventListener('click', () => {
+        hasWater = false;
+        updatePondSim();
+    });
+
+    updatePondSim();
+
     // =========================================================
     // 10. Skill & Tools Interactive Inspector
     // =========================================================

@@ -115,7 +115,7 @@
         <!-- Ringkasan Cepat / Stats Bar -->
         <section class="stats-bar reveal" aria-label="Ringkasan Portofolio">
             <div class="stat-item">
-                <span class="stat-num" data-target="3">0</span>
+                <span class="stat-num" data-target="4">0</span>
                 <span class="stat-label">Hardware Projects</span>
             </div>
             <div class="stat-item">
@@ -127,7 +127,7 @@
                 <span class="stat-label">Bulan Magang IT</span>
             </div>
             <div class="stat-item">
-                <span class="stat-num" data-target="3">0</span>
+                <span class="stat-num" data-target="4">0</span>
                 <span class="stat-label">Simulator Virtual</span>
             </div>
         </section>
@@ -284,6 +284,33 @@
                         </div>
                     </div>
                 </article>
+
+                <article class="proyek-card" data-status="progress" data-tags="aquaculture water control flood sensor water level kolam ikan arduino uno pompa air relay">
+                    <div class="proyek-galeri-wrap">
+                        <div class="proyek-galeri single">
+                            <div class="img-placeholder" aria-label="Dokumentasi foto Aquaculture Water Control belum tersedia">
+                                <span class="placeholder-icon" aria-hidden="true">📷</span>
+                                <span class="placeholder-text">Foto Rangkaian Menyusul</span>
+                            </div>
+                        </div>
+                        <span class="status-badge status-progress">In Progress</span>
+                    </div>
+                    <div class="proyek-info">
+                        <h3>Aquaculture Water Control</h3>
+                        <p class="proyek-deskripsi">
+                            Sistem kendali pengisian air otomatis untuk kolam budidaya berbasis Arduino Uno dan water level sensor. Ketika ada air terdeteksi, relay memutus pompa air; saat tidak ada air, relay aktif menyalakan pompa pengisi.
+                        </p>
+                        <div class="komponen-list">
+                            <span class="komponen-badge">Arduino Uno</span>
+                            <span class="komponen-badge">Water Level Sensor</span>
+                            <span class="komponen-badge">Relay</span>
+                            <span class="komponen-badge">Pompa Air</span>
+                        </div>
+                        <div class="proyek-footer">
+                            <button type="button" class="btn-link sim-jump" data-sim="flood">Uji di Simulator &rarr;</button>
+                        </div>
+                    </div>
+                </article>
             </div>
             <p class="empty-state" id="proyek-empty" hidden>Tidak ada project yang cocok dengan filter atau pencarianmu.</p>
         </section>
@@ -295,13 +322,14 @@
                     <span class="section-kicker">Eksperimen JavaScript</span>
                     <h2>Lab Simulator Prototipe Virtual</h2>
                 </div>
-                <p class="section-subtitle">Coba simulasi cara kerja ketiga rangkaian elektronika langsung di browser.</p>
+                <p class="section-subtitle">Coba simulasi cara kerja keempat rangkaian elektronika &amp; mikrokontroler langsung di browser.</p>
             </div>
 
             <div class="sim-tabs" role="tablist" aria-label="Pilih simulator prototipe">
                 <button type="button" class="sim-tab active" data-sim-tab="dadu" role="tab" aria-selected="true">🎲 Dadu Digital (NE555)</button>
                 <button type="button" class="sim-tab" data-sim-tab="lighting" role="tab" aria-selected="false">💡 Auto Lighting (LDR)</button>
                 <button type="button" class="sim-tab" data-sim-tab="alarm" role="tab" aria-selected="false">🚨 Alarm Pintu</button>
+                <button type="button" class="sim-tab" data-sim-tab="flood" role="tab" aria-selected="false">💧 Aquaculture Water Control</button>
             </div>
 
             <div class="sim-stage">
@@ -383,6 +411,39 @@
                             <button type="button" id="btn-toggle-door" class="btn-secondary">Buka Pintu</button>
                             <button type="button" id="btn-mute-alarm" class="btn-outline" title="Nyalakan atau matikan efek suara Web Audio">🔊 Suara: ON</button>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Simulator 4: Aquaculture Water Control ON/OFF (Arduino Uno) -->
+                <div class="sim-panel" id="sim-flood" role="tabpanel">
+                    <div class="sim-visual">
+                        <div class="flood-box" id="flood-box">
+                            <div class="flood-header">
+                                <span class="mono-val">ARDUINO UNO · WATER SENSOR</span>
+                                <span class="pump-badge" id="pump-badge">POMPA: MATI</span>
+                            </div>
+                            <div class="water-tank pond-tank" aria-label="Visualisasi Kondisi Air Aquaculture Water Control">
+                                <div class="water-fill" id="water-fill"></div>
+                                <div class="sensor-probe" aria-hidden="true">
+                                    <span class="probe-led"></span>
+                                    <span class="probe-body"></span>
+                                </div>
+                                <div class="tank-readout" id="tank-readout">ADA AIR</div>
+                            </div>
+                            <div class="flood-telemetry">
+                                <span>Sensor: <strong id="sensor-state-text" class="mono-val">ADA AIR</strong></span>
+                                <span>Relay: <strong id="relay-state-text" class="mono-val">OFF</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sim-controls">
+                        <h3>Simulasi Aquaculture Water Control (ON/OFF)</h3>
+                        <p>Sistem bekerja dengan dua kondisi logika (ON/OFF): saat sensor mendeteksi <strong>ada air</strong>, relay mati sehingga pompa air berhenti. Ketika <strong>tidak ada air</strong>, relay aktif menghidupkan pompa pengisi secara otomatis.</p>
+                        <div class="sim-btn-row">
+                            <button type="button" id="btn-water-present" class="btn-primary">Simulasi: Ada Air</button>
+                            <button type="button" id="btn-water-absent" class="btn-secondary">Simulasi: Tidak Ada Air</button>
+                        </div>
+                        <div class="sim-log">Logika aktif: <strong id="pond-rule-text" class="mono-val">Ada Air &rarr; Relay OFF &rarr; Pompa Mati</strong></div>
                     </div>
                 </div>
             </div>

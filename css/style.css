@@ -735,7 +735,7 @@ body.dark-mode .filter-btn.active {
 
 .proyek-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 18px;
 }
 
@@ -772,6 +772,32 @@ body.dark-mode .filter-btn.active {
 
 .proyek-galeri.single {
     grid-template-columns: 1fr;
+}
+
+.img-placeholder {
+    height: 128px;
+    border-radius: var(--radius-sm);
+    border: 1.5px dashed var(--border-strong);
+    background: linear-gradient(135deg, var(--surface) 0%, var(--accent-soft) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: var(--text-soft);
+    text-align: center;
+    padding: 12px;
+}
+
+.placeholder-icon {
+    font-size: 1.5rem;
+    opacity: 0.75;
+}
+
+.placeholder-text {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-weight: 600;
 }
 
 .img-trigger {
@@ -1142,6 +1168,129 @@ body.dark-mode .sim-tab.active {
 }
 
 .alarm-box.triggered .buzzer-wave {
+    color: #ef4444;
+}
+
+/* Aquaculture Water Control Simulator */
+.flood-box {
+    background-color: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.flood-header,
+.flood-telemetry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.74rem;
+    color: var(--text-soft);
+}
+
+.pump-badge {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background-color: var(--surface-alt);
+    border: 1px solid var(--border-strong);
+    color: var(--text-muted);
+}
+
+.flood-box.pump-active .pump-badge {
+    background-color: var(--success-bg);
+    border-color: var(--accent-2);
+    color: var(--success-text);
+    animation: pulse-pump 1s infinite alternate;
+}
+
+@keyframes pulse-pump {
+    from { opacity: 0.8; }
+    to { opacity: 1; }
+}
+
+.water-tank {
+    position: relative;
+    height: 120px;
+    border-radius: var(--radius-sm);
+    background-color: var(--surface-alt);
+    border: 2px solid var(--border-strong);
+    overflow: hidden;
+}
+
+.water-fill {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 72%;
+    background: linear-gradient(180deg, rgba(14, 165, 233, 0.72), rgba(2, 132, 199, 0.92));
+    transition: height 0.3s ease, opacity 0.25s ease;
+}
+
+.flood-box.pump-active .water-fill {
+    height: 12%;
+    opacity: 0.45;
+}
+
+.sensor-probe {
+    position: absolute;
+    top: 0;
+    left: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+}
+
+.probe-led {
+    width: 10px;
+    height: 10px;
+    margin-top: 6px;
+    border-radius: 50%;
+    background-color: #10b981;
+    box-shadow: 0 0 8px #10b981;
+}
+
+.flood-box.pump-active .probe-led {
+    background-color: #ef4444;
+    box-shadow: 0 0 10px #ef4444;
+}
+
+.probe-body {
+    width: 6px;
+    height: 54px;
+    margin-top: 3px;
+    border-radius: 0 0 4px 4px;
+    background-color: #64748b;
+}
+
+.tank-readout {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.flood-box.pump-active #relay-state-text {
+    color: var(--accent-2);
+}
+
+.flood-box.pump-active #sensor-state-text {
     color: #ef4444;
 }
 
