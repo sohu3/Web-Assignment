@@ -26,7 +26,7 @@
         <nav class="nav-links" id="nav-links" aria-label="Navigasi Utama">
             <a href="#tentang" class="nav-link active">Tentang</a>
             <a href="#pendidikan" class="nav-link">Pendidikan</a>
-            <a href="#proyek" class="nav-link">Proyek</a>
+            <a href="#proyek" class="nav-link">Projects</a>
             <a href="#simulator" class="nav-link">Lab Interaktif</a>
             <a href="#fokus" class="nav-link">Skills</a>
             <a href="#kontak" class="nav-link">Kontak</a>
@@ -68,7 +68,7 @@
                 </p>
 
                 <div class="hero-actions">
-                    <a href="#proyek" class="btn-primary">Lihat Proyek Praktikum</a>
+                    <a href="#proyek" class="btn-primary">Lihat Project</a>
                     <a href="#simulator" class="btn-secondary">Coba Lab Simulator</a>
                     <a href="cv-anggraito.pdf" download class="btn-outline btn-download" id="btn-download-cv">
                         Download CV
@@ -116,7 +116,7 @@
         <section class="stats-bar reveal" aria-label="Ringkasan Portofolio">
             <div class="stat-item">
                 <span class="stat-num" data-target="3">0</span>
-                <span class="stat-label">Proyek Praktikum</span>
+                <span class="stat-label">Hardware Projects</span>
             </div>
             <div class="stat-item">
                 <span class="stat-num" data-target="12">0</span>
@@ -175,22 +175,22 @@
             </div>
         </section>
 
-        <!-- Proyek Praktikum dengan Filter & Lightbox -->
+        <!-- Hardware Projects dengan Filter & Lightbox -->
         <section id="proyek" class="card-section reveal">
             <div class="section-header proyek-header">
                 <div>
                     <span class="section-kicker">Karya Elektronika</span>
-                    <h2>Proyek Praktikum</h2>
+                    <h2>Hardware Projects</h2>
                 </div>
 
                 <div class="proyek-controls">
-                    <div class="filter-group" role="tablist" aria-label="Filter status proyek">
+                    <div class="filter-group" role="tablist" aria-label="Filter status project">
                         <button type="button" class="filter-btn active" data-filter="all" role="tab" aria-selected="true">Semua</button>
                         <button type="button" class="filter-btn" data-filter="selesai" role="tab" aria-selected="false">Selesai</button>
                         <button type="button" class="filter-btn" data-filter="progress" role="tab" aria-selected="false">In Progress</button>
                     </div>
                     <div class="search-box">
-                        <input type="search" id="project-search" placeholder="Cari proyek / komponen..." aria-label="Cari proyek atau komponen">
+                        <input type="search" id="project-search" placeholder="Cari project / komponen..." aria-label="Cari project atau komponen">
                     </div>
                 </div>
             </div>
@@ -285,7 +285,7 @@
                     </div>
                 </article>
             </div>
-            <p class="empty-state" id="proyek-empty" hidden>Tidak ada proyek yang cocok dengan filter atau pencarianmu.</p>
+            <p class="empty-state" id="proyek-empty" hidden>Tidak ada project yang cocok dengan filter atau pencarianmu.</p>
         </section>
 
         <!-- Lab Interaktif: Simulator Virtual Prototipe -->
@@ -477,7 +477,7 @@
             <div class="kontak-grid">
                 <div class="kontak-info-col">
                     <p class="proyek-deskripsi">
-                        Terbuka untuk diskusi seputar perkuliahan, proyek praktikum elektronika, maupun kolaborasi teknologi:
+                        Terbuka untuk diskusi seputar perkuliahan, project elektronika, maupun kolaborasi teknologi:
                     </p>
                     <div class="kontak-list">
                         <div class="kontak-item">
@@ -508,7 +508,7 @@
                         <div class="form-field">
                             <label for="sender-topic">Topik</label>
                             <select id="sender-topic" name="topic">
-                                <option value="Diskusi Proyek">Diskusi Proyek</option>
+                                <option value="Diskusi Project">Diskusi Project</option>
                                 <option value="Perkuliahan">Perkuliahan</option>
                                 <option value="Kolaborasi">Kolaborasi</option>
                             </select>
@@ -531,13 +531,13 @@
     <!-- Back to top -->
     <button type="button" id="back-to-top" class="back-to-top" aria-label="Kembali ke atas">&uarr;</button>
 
-    <!-- Lightbox Modal untuk Preview Gambar Proyek -->
+    <!-- Lightbox Modal untuk Preview Gambar Project -->
     <div id="image-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-caption" hidden>
         <div class="modal-dialog">
             <button type="button" class="modal-close" id="modal-close" aria-label="Tutup preview gambar">&times;</button>
             <div class="modal-media">
                 <button type="button" class="modal-nav modal-prev" id="modal-prev" aria-label="Gambar sebelumnya">&#10094;</button>
-                <img id="modal-img" src="" alt="Preview Proyek">
+                <img id="modal-img" src="" alt="Preview Project">
                 <button type="button" class="modal-nav modal-next" id="modal-next" aria-label="Gambar berikutnya">&#10095;</button>
             </div>
             <div class="modal-meta">

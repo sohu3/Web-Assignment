@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // =========================================================
-    // 7. Filter & Search Proyek Praktikum
+    // 7. Filter & Search Projects
     // =========================================================
     const filterButtons = document.querySelectorAll('.filter-btn');
     const searchInput = document.getElementById('project-search');
